@@ -1,1 +1,1 @@
-A sort of cronjob, later replaced with webhook.php
+A sort of cronjob, later replaced with a function within themes/medifar/inc/template-functions.php
