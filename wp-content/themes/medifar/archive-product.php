@@ -1,0 +1,154 @@
+<?php
+
+/**
+ * The Template for displaying product archives, including the main shop page which is a post type archive
+ *
+ * This template can be overridden by copying it to yourtheme/woocommerce/archive-product.php.
+ *
+ * HOWEVER, on occasion WooCommerce will need to update template files and you
+ * (the theme developer) will need to copy the new files to your theme to
+ * maintain compatibility. We try to do this as little as possible, but it does
+ * happen. When this occurs the version of the template file will be bumped and
+ * the readme will list any important changes.
+ *
+ * @see https://docs.woocommerce.com/document/template-structure/
+ * @package WooCommerce\Templates
+ * @version 3.4.0
+ */
+
+defined('ABSPATH') || exit;
+
+get_header('shop');
+
+/**
+ * Hook: woocommerce_before_main_content.
+ *
+ * @hooked woocommerce_output_content_wrapper - 10 (outputs opening divs for the content)
+ * @hooked woocommerce_breadcrumb - 20
+ * @hooked WC_Structured_Data::generate_website_data() - 30
+ */
+do_action('woocommerce_before_main_content');
+
+?>
+
+<div class="main_inner">
+	<div class="main-container category left-sidebar single-product-sidebar">
+		<div class="main-inner-container">
+			<!-- category block -->
+			<div class="category-list">
+				<div class="category-box">
+					<div class="home-category widget_product_categories">
+					<?php dynamic_sidebar('home-categorias'); ?>
+					</div>
+				</div>
+			</div>
+			<!-- end category block -->
+
+		</div>
+	</div>
+</div>
+<div class="main-content">
+	<div class="page-title">
+		<div class="page-title-inner">
+
+			<?php if (apply_filters('woocommerce_show_page_title', true)) : ?>
+				<h3 class="entry-title-main"><?php woocommerce_page_title(); ?></h3>
+			<?php endif; ?>
+
+			
+
+		</div>
+	</div>
+	<div class="main-content-inner ">
+		<div id="main-content" class="main-content box-page left-sidebar">
+
+			<div class="content-area">
+
+				<div id="primary" class="content-area">
+
+				<?php
+			/**
+			 * Hook: woocommerce_archive_description.
+			 *
+			 * @hooked woocommerce_taxonomy_archive_description - 10
+			 * @hooked woocommerce_product_archive_description - 10
+			 */
+			do_action('woocommerce_archive_description');
+			?>
+			
+					<?php
+					if (woocommerce_product_loop()) {
+
+						/**
+						 * Hook: woocommerce_before_shop_loop.
+						 *
+						 * @hooked woocommerce_output_all_notices - 10
+						 * @hooked woocommerce_result_count - 20
+						 * @hooked woocommerce_catalog_ordering - 30
+						 */
+						do_action('woocommerce_before_shop_loop');
+
+						woocommerce_product_loop_start();
+
+						if (wc_get_loop_prop('total')) {
+							while (have_posts()) {
+								the_post();
+
+								/**
+								 * Hook: woocommerce_shop_loop.
+								 */
+								do_action('woocommerce_shop_loop');
+
+								get_template_part('template-parts/content', 'product');
+							}
+						}
+
+						woocommerce_product_loop_end();
+
+						/**
+						 * Hook: woocommerce_after_shop_loop.
+						 *
+						 * @hooked woocommerce_pagination - 10
+						 */
+						do_action('woocommerce_after_shop_loop');
+					} else {
+						/**
+						 * Hook: woocommerce_no_products_found.
+						 *
+						 * @hooked wc_no_products_found - 10
+						 */
+						do_action('woocommerce_no_products_found');
+					}
+
+					?>
+					
+					</div>
+
+					<?php
+
+					/**
+				 * Hook: woocommerce_sidebar.
+				 *
+				 * @hooked woocommerce_get_sidebar - 10
+				 */
+				do_action('woocommerce_sidebar');
+
+					/**
+					 * Hook: woocommerce_after_main_content.
+					 *
+					 * @hooked woocommerce_output_content_wrapper_end - 10 (outputs closing divs for the content)
+					 */
+					do_action('woocommerce_after_main_content');				
+
+				 ?>				
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+
+<?php get_footer('shop');

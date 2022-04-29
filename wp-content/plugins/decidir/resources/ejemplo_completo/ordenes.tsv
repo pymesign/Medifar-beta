@@ -1,0 +1,2 @@
+id	key_public	key_private	status	data	mediodepago	payment_response	payment	refund	tokenization
+sdk_php2715822	96e7f0d36a0648fb9a8dcb50ac06d260		1b19bb47507c4a259ca22c12f78e881f		PENDIENTE	{"currency":"ARS","user_id":"pepe","cuotas":"1","user_mail":"info@pymesign.com","stablishment":"Test"}	0	""			
