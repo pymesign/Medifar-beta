@@ -6,23 +6,23 @@ ini_set('display_errors', 1);*/
 
 /**
  * Plugin Name: WooCommerce Decidir Gateway
- * Plugin URI: https://www.skyverge.com/?p=3343
+ * Plugin URI: https://www.pymesign.com/?p=3343
  * Description: Clones the "Cheque" gateway to create another manual / offline payment method; can be used for testing as well.
- * Author: SkyVerge
- * Author URI: http://www.skyverge.com/
+ * Author: Diego Moreno
+ * Author URI: https://www.pymesign.com/
  * Version: 1.0.2
  * Text Domain: wc-gateway-decidir
  * Domain Path: /i18n/languages/
  *
- * Copyright: (c) 2015-2016 SkyVerge, Inc. (info@skyverge.com) and WooCommerce
+ * Copyright: (c) 2015-2016 Pymesign.com (info@pymesign.com) and WooCommerce
  *
  * License: GNU General Public License v3.0
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  *
  * @package   WC-Gateway-Decidir
- * @author    SkyVerge
+ * @author    Pymesign
  * @category  Admin
- * @copyright Copyright (c) 2015-2016, SkyVerge, Inc. and WooCommerce
+ * @copyright Copyright (c) 2021, Pymesign.com and WooCommerce
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  *
  * This offline gateway forks the WooCommerce core "Cheque" payment gateway to create another offline payment method.
