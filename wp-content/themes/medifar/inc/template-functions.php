@@ -39,6 +39,9 @@ function medifar_pingback_header()
 }
 add_action('wp_head', 'medifar_pingback_header');
 
+/**
+ * Function to update product stock from DOS files folder INFO-PARA-WEB
+ */
 function display_hello_world_page()
 {
 	//echo 'Archivos en directorio: <br />';
