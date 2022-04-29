@@ -456,7 +456,7 @@ function wc_decidir_gateway_init()
 						break;
 					case '9':
 						$total = round(($total * 1.3041), 2);
-						break;						
+						break;
 					case '12':
 						$total = round(($total * 1.4067), 2);
 						break;
@@ -488,7 +488,7 @@ function wc_decidir_gateway_init()
 				CURLOPT_POSTFIELDS => "{\"card_number\":\"$tarjeta_numero\",\"card_expiration_month\":\"$mes\",\"card_expiration_year\":\"$anio\",\"security_code\":\"$tarjeta_cvc\",\"card_holder_name\":\"$tarjeta_nombre\",\"card_holder_identification\":{\"type\":\"dni\",\"number\":\"\"}}",
 				CURLOPT_HTTPHEADER => array(
 					//"apikey: 96e7f0d36a0648fb9a8dcb50ac06d260", //public key test
-					"apikey: 4ab4d104dcad46488216da72018ee36e", //public key producción
+					"apikey: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", //public key producción
 					"cache-control: no-cache",
 					"content-type: application/json"
 				),
@@ -507,9 +507,8 @@ function wc_decidir_gateway_init()
 				$subject = 'Response token';
 				$body = $response;
 				$headers = array('Content-Type: text/html; charset=UTF-8');
-				
-				wp_mail( $to, $subject, $body, $headers );
 
+				wp_mail($to, $subject, $body, $headers);
 			}
 
 			//serializamos los datos
@@ -533,7 +532,7 @@ function wc_decidir_gateway_init()
 				CURLOPT_POSTFIELDS => "{\"site_transaction_id\":\"$order_id\",\"token\":\"$token\",\"payment_method_id\":$tarjeta_tipo,\"bin\":\"$bin\",\"amount\":$total,\"currency\":\"ARS\",\"installments\":$cuotas,\"description\":\"\",\"payment_type\":\"single\",\"sub_payments\":[]}",
 				CURLOPT_HTTPHEADER => array(
 					//"apikey: 1b19bb47507c4a259ca22c12f78e881f", //private key test
-					"apikey: 265b7d1c20de4805b287151b014b7195", //private key producción
+					"apikey: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", //private key producción
 					"cache-control: no-cache",
 					"content-type: application/json"
 				),
@@ -541,11 +540,11 @@ function wc_decidir_gateway_init()
 
 			//var_dump($_REQUEST);			
 			//wp_mail("info@pymesign.com", "Request Medifar", print_r($_REQUEST, true));
-			
+
 			$response = curl_exec($curl);
 			$err = curl_error($curl);
 
-			curl_close($curl);			
+			curl_close($curl);
 
 			if ($err) {
 				echo "cURL Error #:" . $err;
@@ -554,14 +553,14 @@ function wc_decidir_gateway_init()
 				wp_mail("info@pymesign.com", "Response pago Medifar", $response);
 			}
 
-			/* fin decidir ejemplo */
+			/* end decidir ejemplo */
 
 			//serializamos los datos de la compra
 			$obj = json_decode($response);
 			$status = $obj->{'status'};
 			$amount = $obj->{'amount'};
-			$total_financiado = $amount/100;
-			
+			$total_financiado = $amount / 100;
+
 			update_post_meta($order_id, 'total_financiado', esc_attr($total_financiado));
 
 			if ($status == 'approved') {
